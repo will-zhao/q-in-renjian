@@ -1,0 +1,7 @@
+{
+  "_comment": "写作层与引擎解耦的唯一连接点。source_dir 指向任意“装着 md+图片的文件夹”,换编辑器/换位置只改这里。",
+  "source_dir": "/Users/enqrtuc/Library/CloudStorage/GoogleDrive-will.z.zhao@gmail.com/My Drive/Obsidian/Q在人间",
+  "content_dir": "content/posts",
+  "exclude_dirs": ["attachments", "封面", ".obsidian", ".git", ".trash", ".DS_Store"],
+  "site_url": "https://will-zhao.github.io/q-in-renjian/"
+}

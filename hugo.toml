@@ -1,0 +1,73 @@
+baseURL = "https://will-zhao.github.io/q-in-renjian/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh-cn"
+title = "Q在人间"
+theme = "PaperMod"
+
+# 分页
+paginate = 10
+
+# 让 Hugo 生成 robots.txt(利于 Google/Bing 收录)
+enableRobotsTXT = true
+
+# 允许原始 HTML(公众号/富文本兼容,谨慎但博客常用)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    style = "github"
+
+[params]
+  # 首页模式:显示文章列表
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  # 首页副标题
+  description = "Q在人间 —— 记录生活、亲子、散文与诗歌"
+
+  [params.homeInfoParams]
+    Title = "Q在人间"
+    Content = "记录生活里的光 —— 散文 · 亲子 · 诗歌 · 小说"
+
+  [params.profileMode]
+    enabled = false
+
+# 顶部导航菜单(按你的分类)
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "全部文章"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "categories"
+    name = "分类"
+    url = "/categories/"
+    weight = 20
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 30
+  [[menu.main]]
+    identifier = "search"
+    name = "搜索"
+    url = "/search/"
+    weight = 40
+
+# 生成分类/标签等分类法
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# 输出格式(为 PaperMod 搜索功能生成 JSON)
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
