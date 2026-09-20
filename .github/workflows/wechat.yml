@@ -1,0 +1,29 @@
+name: Push to WeChat draft
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# 避免并发推送
+concurrency:
+  group: "wechat-push"
+  cancel-in-progress: false
+
+jobs:
+  wechat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH 进 VM(固定IP)→ 拉取最新文章 → 推送公众号草稿
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script_stop: true
+          command_timeout: "10m"
+          script: |
+            set -e
+            cd ~/q-in-renjian
+            git pull --ff-only
+            .venv/bin/python scripts/wechat_push.py
