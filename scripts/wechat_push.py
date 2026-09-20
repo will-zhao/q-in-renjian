@@ -206,10 +206,27 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--all", action="store_true", help="强制重推全部文章")
     ap.add_argument("--only", help="只推送指定标题的文章")
+    ap.add_argument("--mark-done", nargs="+", metavar="标题",
+                    help="把指定标题标记为已处理(记录hash但不推送),自动化将跳过它们")
     args = ap.parse_args()
 
     cfg = load_config()
     state = load_state()
+
+    # --mark-done: 只更新状态,不调用任何微信接口
+    if args.mark_done:
+        for name in args.mark_done:
+            idx = CONTENT_DIR / name / "index.md"
+            if idx.exists():
+                state[name] = {"hash": hashlib.md5(idx.read_bytes()).hexdigest(),
+                               "title": name, "note": "manually handled"}
+                print(f"已标记跳过: {name}")
+            else:
+                print(f"未找到: {name}(检查标题是否与 content/posts 下目录名一致)")
+        save_state(state)
+        print("state.json 更新完成")
+        return
+
     token = get_access_token(cfg)
     print(f"[ok] 已获取 access_token(固定IP白名单生效)")
 
