@@ -3,6 +3,9 @@
 # 用法: ./publish.sh ["提交说明"]
 set -euo pipefail
 
+# 保证从 GUI(如 Obsidian 插件)调用时也能找到 hugo/git/gh/python3
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
 cd "$(dirname "$0")"
 
 MSG="${1:-publish: $(date '+%Y-%m-%d %H:%M')}"
